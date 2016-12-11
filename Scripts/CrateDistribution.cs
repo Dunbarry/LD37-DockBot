@@ -24,8 +24,11 @@ public class CrateDistribution : MonoBehaviour {
 		for (int c = 0; c <= 11; c++) {
 			xCoord = Random.Range (-15, 15);
 			zCoord = Random.Range (-15, 15);
-			var newCrate = Instantiate (Crates, new Vector3 (xCoord, 0.79f, zCoord), Quaternion.identity) as GameObject;
+			var newCrate = Instantiate (Crates, new Vector3 (xCoord, 0, zCoord), Quaternion.identity) as GameObject;
 			newCrate.transform.SetParent (CratesContain.transform, false);
+//			newCrate.transform.localPosition = Crates.transform.localPosition;
+//			newCrate.transform.localScale = Crates.transform.localScale;
+			newCrate.transform.localRotation = Crates.transform.localRotation;
 		}
 	}
 }
