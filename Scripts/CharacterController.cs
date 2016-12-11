@@ -47,6 +47,13 @@ public class CharacterController : MonoBehaviour {
 		return Physics.Raycast(transform.position, Vector3.down, moveSetting.distToGrounded, moveSetting.ground);
 	}
 
+//	Inventory
+	public string reservoir;
+	public string secondReservoir;
+	private bool compare;
+	private bool match;
+	private GameObject opened;
+
 	void Start()
 	{
 		targetRotation = transform.rotation;
@@ -57,6 +64,9 @@ public class CharacterController : MonoBehaviour {
 
 		forwardInput = turnInput = 0;
 		// jumpInput
+		compare = false;
+		match = false;
+		reservoir = secondReservoir = "empty";
 	}
 
 	void GetInput()
@@ -100,5 +110,47 @@ public class CharacterController : MonoBehaviour {
 			targetRotation *= Quaternion.AngleAxis (moveSetting.rotateVel * turnInput * Time.deltaTime, Vector3.up);
 		}
 		transform.rotation = targetRotation;
+	}
+
+	void unpackCrate(Collider other)
+	{
+		CrateController crateCon = other.GetComponent<CrateController> ();
+		if (!compare) {
+			reservoir = crateCon.crateContents;
+			compare = true;
+		} else if (compare) {
+			secondReservoir = crateCon.crateContents;
+			if (reservoir == secondReservoir) {
+				Debug.Log ("Match!");
+				match = true;
+			} else if (reservoir != secondReservoir){
+				Debug.Log ("Not a Match!");
+				compare = false;
+				reservoir = secondReservoir = "empty";
+				opened = null;
+			}
+			Debug.Log (match);
+			Debug.Log (compare);
+		}
+	}
+
+	void Listener(Collider other)
+	{
+		if(other.gameObject.CompareTag("Crate")){
+			if (Input.GetKeyDown ("q")) {
+				if (other.gameObject != opened) {
+					opened = other.gameObject;
+					unpackCrate (other);
+				} else if (other.gameObject == opened) {
+					Debug.Log ("Crate already opened");
+				}
+			}
+		}
+	}
+
+
+	void OnTriggerStay(Collider other)
+	{
+		Listener(other);
 	}
 }
