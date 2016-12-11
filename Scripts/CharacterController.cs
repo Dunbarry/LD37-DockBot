@@ -48,26 +48,30 @@ public class CharacterController : MonoBehaviour {
 	}
 
 //	Inventory
+	public  int cratesRemaining;
 	public string reservoir;
 	public string secondReservoir;
 	public GameObject lastCrate;
 	public GameObject currentCrate;
-	private bool compare;
 	private bool match;
+	private bool compare;
 
 	void Start()
 	{
+//		Movement
 		targetRotation = transform.rotation;
 		if (GetComponent<Rigidbody> ())
 			rBody = GetComponent<Rigidbody> ();
 		else
 			Debug.LogError ("The character needs a rigid body.");
-
-		forwardInput = turnInput = 0;
 		// jumpInput
+		forwardInput = turnInput = 0;
+
+//		Inventory
 		compare = false;
 		match = false;
 		reservoir = secondReservoir = "empty";
+		cratesRemaining = 2;
 	}
 
 	void GetInput()
@@ -114,6 +118,15 @@ public class CharacterController : MonoBehaviour {
 	}
 
 //	Checking crate contents & Filling Reservoirs!
+	void inventoryReset()
+	{
+		compare = false;
+		reservoir = secondReservoir = "empty";
+		lastCrate = currentCrate = null;
+		Debug.Log ("Match: ", match);
+		Debug.Log ("Compare: ", compare);
+	}
+
 	void unpackCrate(Collider other)
 	{
 		CrateController crateCon = other.GetComponent<CrateController> ();
@@ -127,12 +140,11 @@ public class CharacterController : MonoBehaviour {
 				match = true;
 			} else if (reservoir != secondReservoir){
 				Debug.Log ("Not a Match!");
-				compare = false;
-				reservoir = secondReservoir = "empty";
-				lastCrate = currentCrate = null;
+				inventoryReset ();
+//				compare = false;
+//				reservoir = secondReservoir = "empty";
+//				lastCrate = currentCrate = null;
 			}
-			Debug.Log ("Match:" + match);
-			Debug.Log ("Compare: " + compare);
 		}
 	}
 
@@ -155,9 +167,33 @@ public class CharacterController : MonoBehaviour {
 		}
 	}
 
+//Delivering Elements! ~~~~~~~~~~~~~~~
+	void winCondition()
+	{
+		cratesRemaining -= 2;
+		Debug.Log ("Crates remaining: ", cratesRemaining);
+		if (cratesRemaining == 0) {
+			Debug.Log ("You Win!");
+		}
+	}
+
+	void Delivery(Collider other)
+	{
+		if (other.gameObject.CompareTag ("Distributor")) {
+			if (Input.GetKeyDown ("q")) {
+				if (match) {
+					Destroy (lastCrate);
+					Destroy (currentCrate);
+					inventoryReset ();
+					winCondition ();
+				}
+			}
+		}
+	}
 
 	void OnTriggerStay(Collider other)
 	{
 		Listener(other);
+		Delivery (other);
 	}
 }
