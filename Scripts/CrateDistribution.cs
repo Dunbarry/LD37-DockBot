@@ -32,3 +32,5 @@ public class CrateDistribution : MonoBehaviour {
 		}
 	}
 }
+
+```
