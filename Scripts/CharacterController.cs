@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour {
 
@@ -53,8 +54,15 @@ public class CharacterController : MonoBehaviour {
 	public string secondReservoir;
 	public GameObject lastCrate;
 	public GameObject currentCrate;
+	public bool won;
+	private int wins;
 	private bool match;
 	private bool compare;
+
+
+//	UI
+	public GameObject winText;
+	private GameObject winner;
 
 	void Start()
 	{
@@ -72,6 +80,9 @@ public class CharacterController : MonoBehaviour {
 		match = false;
 		reservoir = secondReservoir = "empty";
 		cratesRemaining = 2;
+
+		won = false;
+		wins = 0;
 	}
 
 	void GetInput()
@@ -85,6 +96,7 @@ public class CharacterController : MonoBehaviour {
 	{
 		GetInput();
 		Turn();
+//		statusCheck ("Shipment sorted!");
 
 	}
 
@@ -120,20 +132,20 @@ public class CharacterController : MonoBehaviour {
 //	Checking crate contents & Filling Reservoirs!
 	void inventoryReset()
 	{
+		match = false;
 		compare = false;
 		reservoir = secondReservoir = "empty";
-		lastCrate = currentCrate = null;
-		Debug.Log ("Match: ", match);
-		Debug.Log ("Compare: ", compare);
+//		lastCrate = currentCrate = null;
+		Debug.Log("Inventory Reset");
 	}
 
 	void unpackCrate(Collider other)
 	{
 		CrateController crateCon = other.GetComponent<CrateController> ();
-		if (!compare) {
+		if (compare == false) {
 			reservoir = crateCon.crateContents;
 			compare = true; //Check the next crate against this one.
-		} else if (compare) {
+		} else {
 			secondReservoir = crateCon.crateContents;
 			if (reservoir == secondReservoir) {
 				Debug.Log ("Match!");
@@ -141,28 +153,27 @@ public class CharacterController : MonoBehaviour {
 			} else if (reservoir != secondReservoir){
 				Debug.Log ("Not a Match!");
 				inventoryReset ();
-//				compare = false;
-//				reservoir = secondReservoir = "empty";
-//				lastCrate = currentCrate = null;
 			}
 		}
 	}
 
 	void Listener(Collider other)
 	{
-		if(other.gameObject.CompareTag("Crate")){
-			if (Input.GetKeyDown ("q")) {
-				if (other.gameObject != currentCrate) {
-					if (match == false) {
-						lastCrate = currentCrate;
-						currentCrate = other.gameObject;
-						unpackCrate (other);
-					} else if (match == true) {
-						Debug.Log ("Deliver your elements first!");
+		if (!won) {
+			if (match == false) {
+				if (other.gameObject.CompareTag ("Crate")) {
+					if (Input.GetKeyDown ("q")) {
+						if (other.gameObject != currentCrate) {
+							lastCrate = currentCrate;
+							currentCrate = other.gameObject;
+							unpackCrate (other);
+						}
 					}
 				} else if (other.gameObject == currentCrate) {
 					Debug.Log ("Crate already opened");
 				}
+			} else if (match == true) {
+				Debug.Log ("Deliver your elements first!");
 			}
 		}
 	}
@@ -170,22 +181,26 @@ public class CharacterController : MonoBehaviour {
 //Delivering Elements! ~~~~~~~~~~~~~~~
 	void winCondition()
 	{
-		cratesRemaining -= 2;
-		Debug.Log ("Crates remaining: ", cratesRemaining);
+		cratesRemaining = cratesRemaining - 2;
+		Debug.Log ("Crates remaining: "+ cratesRemaining);
 		if (cratesRemaining == 0) {
+			won = true;
 			Debug.Log ("You Win!");
-		}
+		} else if (cratesRemaining > 0)
+			cratesRemaining = 0;
 	}
 
 	void Delivery(Collider other)
 	{
-		if (other.gameObject.CompareTag ("Distributor")) {
-			if (Input.GetKeyDown ("q")) {
-				if (match) {
-					Destroy (lastCrate);
-					Destroy (currentCrate);
-					inventoryReset ();
-					winCondition ();
+		if (!won) {
+			if (other.gameObject.CompareTag ("Distributor")) {
+				if (Input.GetKeyDown ("q")) {
+					if (match) {
+						Destroy (lastCrate);
+						Destroy (currentCrate);
+						inventoryReset ();
+						winCondition ();
+					}
 				}
 			}
 		}

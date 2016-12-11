@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CameraController: MonoBehaviour {
+
 	public bool lockCursor;
 	public float mouseSensitivity;
 	public Transform target;
