@@ -50,9 +50,10 @@ public class CharacterController : MonoBehaviour {
 //	Inventory
 	public string reservoir;
 	public string secondReservoir;
+	public GameObject lastCrate;
+	public GameObject currentCrate;
 	private bool compare;
 	private bool match;
-	private GameObject opened;
 
 	void Start()
 	{
@@ -112,12 +113,13 @@ public class CharacterController : MonoBehaviour {
 		transform.rotation = targetRotation;
 	}
 
+//	Checking crate contents & Filling Reservoirs!
 	void unpackCrate(Collider other)
 	{
 		CrateController crateCon = other.GetComponent<CrateController> ();
 		if (!compare) {
 			reservoir = crateCon.crateContents;
-			compare = true;
+			compare = true; //Check the next crate against this one.
 		} else if (compare) {
 			secondReservoir = crateCon.crateContents;
 			if (reservoir == secondReservoir) {
@@ -127,10 +129,10 @@ public class CharacterController : MonoBehaviour {
 				Debug.Log ("Not a Match!");
 				compare = false;
 				reservoir = secondReservoir = "empty";
-				opened = null;
+				lastCrate = currentCrate = null;
 			}
-			Debug.Log (match);
-			Debug.Log (compare);
+			Debug.Log ("Match:" + match);
+			Debug.Log ("Compare: " + compare);
 		}
 	}
 
@@ -138,10 +140,15 @@ public class CharacterController : MonoBehaviour {
 	{
 		if(other.gameObject.CompareTag("Crate")){
 			if (Input.GetKeyDown ("q")) {
-				if (other.gameObject != opened) {
-					opened = other.gameObject;
-					unpackCrate (other);
-				} else if (other.gameObject == opened) {
+				if (other.gameObject != currentCrate) {
+					if (match == false) {
+						lastCrate = currentCrate;
+						currentCrate = other.gameObject;
+						unpackCrate (other);
+					} else if (match == true) {
+						Debug.Log ("Deliver your elements first!");
+					}
+				} else if (other.gameObject == currentCrate) {
 					Debug.Log ("Crate already opened");
 				}
 			}
