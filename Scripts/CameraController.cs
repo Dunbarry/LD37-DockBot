@@ -1,53 +1,35 @@
 using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class CameraController: MonoBehaviour {
+	public bool lockCursor;
+	public float mouseSensitivity;
 	public Transform target;
-	public float lookSmooth = .09f;
-	public Vector3 offsetFromTarget = new Vector3(0, 4, -6);
-	public float xTilt = 10;
+	public float dstFromTarget = 2;
+	public Vector2 pitchMinMax = new Vector2 (-40, 85);
 
-	Vector3 destination = Vector3.zero;
-	CharacterController charController;
-	float rotateVel = 0;
+	public float rotationSmoothTime = .12f;
+	Vector3 rotationSmoothVelocity;
+	Vector3 currentRotation;
 
+	float yaw;
+	float pitch;
 
-	// Use this for initialization
-	void Start () {
-		SetCameraTarget (target);
-	}
-
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-	void SetCameraTarget(Transform t){
-		target = t;
-
-		if (target != null) {
-			if (target.GetComponent<CharacterController> ()) {
-				charController = target.GetComponent<CharacterController> ();
-			} else
-				Debug.LogError ("Target needs a character controller");
+	void Start(){
+		if (lockCursor) {
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
 		}
-		else
-			Debug.LogError ("Camera needs a target");
 	}
 
-	void LateUpdate(){
-		MoveToTarget ();
-		LookAtTartget ();
-	}
+	void LateUpdate () {
+		yaw += Input.GetAxis ("Mouse X") * mouseSensitivity;
+		pitch -= Input.GetAxis ("Mouse Y") * mouseSensitivity;
+		pitch = Mathf.Clamp (pitch, pitchMinMax.x, pitchMinMax.y);
 
-	void MoveToTarget(){
-		destination = charController.TargetRotation * offsetFromTarget;
-		destination += target.position;
-		transform.position = destination;
-	}
+		currentRotation = Vector3.SmoothDamp (currentRotation, new Vector3 (pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
+		transform.eulerAngles = currentRotation;
 
-	void LookAtTartget(){
-		float eulerYAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, target.eulerAngles.y, ref rotateVel, lookSmooth);
-		transform.rotation = Quaternion.Euler (transform.eulerAngles.x, eulerYAngle, 0);
+		transform.position = target.position - transform.forward * dstFromTarget;
 	}
 }
