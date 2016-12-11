@@ -70,6 +70,7 @@ public class CharacterController : MonoBehaviour {
 	{
 		GetInput();
 		Turn();
+
 	}
 
 	void FixedUpdate()
@@ -100,21 +101,4 @@ public class CharacterController : MonoBehaviour {
 		}
 		transform.rotation = targetRotation;
 	}
-
-	// void Jump()
-	// {
-	// 	if (jumpInput > 0 && Grounded())
-	// 	{
-	// 		jump
-	// 		velocity.y= moveSetting.jumpVel;
-	// 	}
-	// 	else if(jumpInput == 0 && Grounded())
-	// 	{
-	// 		zero velocity
-	// 		velocity.y = 0;
-	// 	}
-	// 	else
-	// 		decrease velocity.y
-	// 		velocity.y -= physSetting.downAccel;
-	// }
 }
