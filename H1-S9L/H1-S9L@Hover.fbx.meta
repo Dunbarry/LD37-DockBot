@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 0c1cfd67f9d714ed1be0c3cd238fea58
+timeCreated: 1481434543
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Foot.L
+    100002: Foot.L_end
+    100004: Foot.R
+    100006: Foot.R_end
+    100008: H1
+    100010: //RootNode
+    100012: Hand1
+    100014: Hand2
+    100016: Hand3
+    100018: LowerArm.L
+    100020: LowerArm.R
+    100022: LowerArm.R_end
+    100024: LowerFinger1
+    100026: LowerFinger1_end
+    100028: LowerFinger2
+    100030: LowerFinger2_end
+    100032: LowerFinger3
+    100034: LowerFinger3_end
+    100036: MainPod
+    100038: MainPod_end
+    100040: Pod.L
+    100042: Pod.R
+    100044: Sphere.001
+    100046: Strut.L
+    100048: Strut.R
+    100050: UpperArm.L
+    100052: UpperArm.R
+    100054: UpperFinger1
+    100056: UpperFinger2
+    100058: UpperFinger3
+    400000: Foot.L
+    400002: Foot.L_end
+    400004: Foot.R
+    400006: Foot.R_end
+    400008: H1
+    400010: //RootNode
+    400012: Hand1
+    400014: Hand2
+    400016: Hand3
+    400018: LowerArm.L
+    400020: LowerArm.R
+    400022: LowerArm.R_end
+    400024: LowerFinger1
+    400026: LowerFinger1_end
+    400028: LowerFinger2
+    400030: LowerFinger2_end
+    400032: LowerFinger3
+    400034: LowerFinger3_end
+    400036: MainPod
+    400038: MainPod_end
+    400040: Pod.L
+    400042: Pod.R
+    400044: Sphere.001
+    400046: Strut.L
+    400048: Strut.R
+    400050: UpperArm.L
+    400052: UpperArm.R
+    400054: UpperFinger1
+    400056: UpperFinger2
+    400058: UpperFinger3
+    4300000: Sphere.001
+    7400000: H1|Hover
+    7400002: H1|TPose
+    7400004: H1|Unpack
+    9500000: //RootNode
+    13700000: Sphere.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

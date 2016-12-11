@@ -47,6 +47,14 @@ public class CharacterController : MonoBehaviour {
 		return Physics.Raycast(transform.position, Vector3.down, moveSetting.distToGrounded, moveSetting.ground);
 	}
 
+//	Inventory
+	public string reservoir;
+	public string secondReservoir;
+	public GameObject lastCrate;
+	public GameObject currentCrate;
+	private bool compare;
+	private bool match;
+
 	void Start()
 	{
 		targetRotation = transform.rotation;
@@ -57,6 +65,9 @@ public class CharacterController : MonoBehaviour {
 
 		forwardInput = turnInput = 0;
 		// jumpInput
+		compare = false;
+		match = false;
+		reservoir = secondReservoir = "empty";
 	}
 
 	void GetInput()
@@ -100,5 +111,53 @@ public class CharacterController : MonoBehaviour {
 			targetRotation *= Quaternion.AngleAxis (moveSetting.rotateVel * turnInput * Time.deltaTime, Vector3.up);
 		}
 		transform.rotation = targetRotation;
+	}
+
+//	Checking crate contents & Filling Reservoirs!
+	void unpackCrate(Collider other)
+	{
+		CrateController crateCon = other.GetComponent<CrateController> ();
+		if (!compare) {
+			reservoir = crateCon.crateContents;
+			compare = true; //Check the next crate against this one.
+		} else if (compare) {
+			secondReservoir = crateCon.crateContents;
+			if (reservoir == secondReservoir) {
+				Debug.Log ("Match!");
+				match = true;
+			} else if (reservoir != secondReservoir){
+				Debug.Log ("Not a Match!");
+				compare = false;
+				reservoir = secondReservoir = "empty";
+				lastCrate = currentCrate = null;
+			}
+			Debug.Log ("Match:" + match);
+			Debug.Log ("Compare: " + compare);
+		}
+	}
+
+	void Listener(Collider other)
+	{
+		if(other.gameObject.CompareTag("Crate")){
+			if (Input.GetKeyDown ("q")) {
+				if (other.gameObject != currentCrate) {
+					if (match == false) {
+						lastCrate = currentCrate;
+						currentCrate = other.gameObject;
+						unpackCrate (other);
+					} else if (match == true) {
+						Debug.Log ("Deliver your elements first!");
+					}
+				} else if (other.gameObject == currentCrate) {
+					Debug.Log ("Crate already opened");
+				}
+			}
+		}
+	}
+
+
+	void OnTriggerStay(Collider other)
+	{
+		Listener(other);
 	}
 }

@@ -1,0 +1,150 @@
+fileFormatVersion: 2
+guid: 7e00d5f157ed6424c94c7244071f3e41
+timeCreated: 1481379707
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Camera
+    100004: Foot.L
+    100006: Foot.L_end
+    100008: Foot.R
+    100010: Foot.R_end
+    100012: H1
+    100014: //RootNode
+    100016: Hand1
+    100018: Hand2
+    100020: Hand3
+    100022: Lamp
+    100024: LowerArm.L
+    100026: LowerArm.R
+    100028: LowerArm.R_end
+    100030: LowerFinger1
+    100032: LowerFinger1_end
+    100034: LowerFinger2
+    100036: LowerFinger2_end
+    100038: LowerFinger3
+    100040: LowerFinger3_end
+    100042: MainPod
+    100044: MainPod_end
+    100046: Mball
+    100048: Pod.L
+    100050: Pod.R
+    100052: Sphere
+    100054: Sphere.001
+    100056: Strut.L
+    100058: Strut.R
+    100060: UpperArm.L
+    100062: UpperArm.R
+    100064: UpperFinger1
+    100066: UpperFinger2
+    100068: UpperFinger3
+    400000: Armature
+    400002: Camera
+    400004: Foot.L
+    400006: Foot.L_end
+    400008: Foot.R
+    400010: Foot.R_end
+    400012: H1
+    400014: //RootNode
+    400016: Hand1
+    400018: Hand2
+    400020: Hand3
+    400022: Lamp
+    400024: LowerArm.L
+    400026: LowerArm.R
+    400028: LowerArm.R_end
+    400030: LowerFinger1
+    400032: LowerFinger1_end
+    400034: LowerFinger2
+    400036: LowerFinger2_end
+    400038: LowerFinger3
+    400040: LowerFinger3_end
+    400042: MainPod
+    400044: MainPod_end
+    400046: Mball
+    400048: Pod.L
+    400050: Pod.R
+    400052: Sphere
+    400054: Sphere.001
+    400056: Strut.L
+    400058: Strut.R
+    400060: UpperArm.L
+    400062: UpperArm.R
+    400064: UpperFinger1
+    400066: UpperFinger2
+    400068: UpperFinger3
+    2300000: Mball
+    2300002: Sphere
+    3300000: Mball
+    3300002: Sphere
+    4300000: Sphere.001
+    4300002: Mball
+    4300004: Sphere
+    9500000: //RootNode
+    13700000: Sphere.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
