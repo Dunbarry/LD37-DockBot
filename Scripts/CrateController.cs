@@ -9,32 +9,33 @@ public class CrateController: MonoBehaviour {
 	private GameObject opener;
 
 	public string crateContents;
-//	var arr3 = new int[] { 1, 2, 3 };
-	string[] gases = new string[] {"C", "N", "O", "P", "S", "Se"};
+//	Set the contents of the crates
+//	string[] gases = new string[] {"N", "Ar", "O", "P", "K", "He"};
 
 	private string crateAction;
 
 	// Use this for initialization
 	void Start () {
-		crateContents = gases[Random.Range (0, 5)];
+//		crateContents = gases[Random.Range (0, 5)];
 		crateAction = "Q";
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log ("Collider Entered");
+		//Show the player how to open a crate, listen for if they do
 		CrateCommand (other);
 		CrateApproach (other);
 	}
 
 	void OnTriggerStay(Collider other){
+//		Listen for if they do
 		CrateCommand (other);
 	}
 
 	void CrateCommand(Collider other)
 	{
 		if (Input.GetKeyDown ("q")) {
-			Debug.Log ("Opening the crate!");
+//Release the Kraken! I mean...crate
 			InitCrateContentsText (crateContents);
 		}
 	}
@@ -53,7 +54,7 @@ public class CrateController: MonoBehaviour {
 			opener.GetComponent<Animator> ().SetTrigger ("OnTriggerEnter");
 			Destroy (opener.gameObject, 2);
 		} else if (Input.GetKeyDown ("q")) {
-			Destroy (opener.gameObject);
+			Destroy (opener.gameObject, 0);
 		}
 	}
 
