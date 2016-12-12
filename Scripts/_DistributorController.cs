@@ -5,13 +5,11 @@ using UnityEngine.UI;
 public class DistributorController : MonoBehaviour {
 
 	public GameObject winText;
-	private bool playerWon;
 
-	CharacterController charControl;
+	private bool playerWon;
 
 	// Use this for initialization
 	void Start () {
-//		charControl = GetComponent<CharacterController> ();
 		playerWon = false;
 	}
 

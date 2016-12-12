@@ -49,19 +49,22 @@ public class CharacterController : MonoBehaviour {
 	}
 
 //	Inventory
+	private int wins;
 	public  int cratesRemaining;
 	public string reservoir;
 	public string secondReservoir;
-	public GameObject lastCrate;
-	public GameObject currentCrate;
 	public bool won;
-	private int wins;
 	private bool match;
 	private bool compare;
+	public GameObject lastCrate;
+	public GameObject currentCrate;
 
+	public Text FRtext;
+	public Text SRtext;
+	public Text Arrow;
 
 //	UI
-	public GameObject winText;
+//	public GameObject winText;
 	private GameObject winner;
 
 	void Start()
@@ -78,9 +81,10 @@ public class CharacterController : MonoBehaviour {
 //		Inventory
 		compare = false;
 		match = false;
-		reservoir = secondReservoir = "empty";
-		cratesRemaining = 2;
+		reservoir = secondReservoir = "--";
+		cratesRemaining = 12;
 
+		setScoreBoard ();
 		won = false;
 		wins = 0;
 	}
@@ -134,9 +138,9 @@ public class CharacterController : MonoBehaviour {
 	{
 		match = false;
 		compare = false;
-		reservoir = secondReservoir = "empty";
-//		lastCrate = currentCrate = null;
-		Debug.Log("Inventory Reset");
+		reservoir = secondReservoir = "--";
+		setScoreBoard ();
+//		Debug.Log("Inventory Reset");
 	}
 
 	void unpackCrate(Collider other)
@@ -144,12 +148,15 @@ public class CharacterController : MonoBehaviour {
 		CrateController crateCon = other.GetComponent<CrateController> ();
 		if (compare == false) {
 			reservoir = crateCon.crateContents;
+			setScoreBoard ();
 			compare = true; //Check the next crate against this one.
 		} else {
 			secondReservoir = crateCon.crateContents;
+			setScoreBoard ();
 			if (reservoir == secondReservoir) {
 				Debug.Log ("Match!");
 				match = true;
+				textToGreen ();
 			} else if (reservoir != secondReservoir){
 				Debug.Log ("Not a Match!");
 				inventoryReset ();
@@ -174,6 +181,7 @@ public class CharacterController : MonoBehaviour {
 				}
 			} else if (match == true) {
 				Debug.Log ("Deliver your elements first!");
+
 			}
 		}
 	}
@@ -210,5 +218,30 @@ public class CharacterController : MonoBehaviour {
 	{
 		Listener(other);
 		Delivery (other);
+	}
+
+//	Scoreboard
+	void setScoreBoard(){
+		FRtext.text = reservoir;
+		SRtext.text = secondReservoir;
+		Arrow.text = " ";
+
+		FRtext.color = Color.blue;
+		SRtext.color = Color.blue;
+		Arrow.color = Color.blue;
+	}
+
+	void textToRed()
+	{
+		FRtext.color = Color.red;
+		SRtext.color = Color.red;
+	}
+
+	void textToGreen()
+	{
+		FRtext.color = Color.green;
+		SRtext.color = Color.green;
+		Arrow.text = "==>";
+		Arrow.color = Color.green;
 	}
 }
