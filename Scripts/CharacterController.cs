@@ -49,7 +49,6 @@ public class CharacterController : MonoBehaviour {
 	}
 
 //	Inventory
-	private int wins;
 	public  int cratesRemaining;
 	public string reservoir;
 	public string secondReservoir;
@@ -86,7 +85,6 @@ public class CharacterController : MonoBehaviour {
 
 		setScoreBoard ();
 		won = false;
-		wins = 0;
 	}
 
 	void GetInput()
@@ -178,10 +176,10 @@ public class CharacterController : MonoBehaviour {
 						}
 					}
 				} else if (other.gameObject == currentCrate) {
-					Debug.Log ("Crate already opened");
+//					Debug.Log ("Crate already opened");
 				}
 			} else if (match == true) {
-				Debug.Log ("Deliver your elements first!");
+//				Debug.Log ("Deliver your elements first!");
 
 			}
 		}
@@ -195,7 +193,7 @@ public class CharacterController : MonoBehaviour {
 		if (cratesRemaining == 0) {
 			won = true;
 			Debug.Log ("You Win!");
-		} else if (cratesRemaining > 0)
+		} else if (cratesRemaining < 0)
 			cratesRemaining = 0;
 	}
 
