@@ -114,14 +114,14 @@ public class CharacterController : MonoBehaviour {
 
 	void Run()
 	{
-		if (Mathf.Abs(forwardInput) > inputSetting.inputDelay)
-		{
+		if (Mathf.Abs (forwardInput) > inputSetting.inputDelay) {
 			// move
 			velocity.z = moveSetting.forwardVel * forwardInput;
-		}
-		else
+		} else {
 			// zero velocity
 			velocity.z = 0;
+		}
+		transform.GetComponent<Animator> ().SetTrigger ("Run");
 	}
 
 	void Turn()
@@ -145,6 +145,7 @@ public class CharacterController : MonoBehaviour {
 
 	void unpackCrate(Collider other)
 	{
+		transform.GetComponent<Animator> ().SetTrigger ("UnpackCrate");
 		CrateController crateCon = other.GetComponent<CrateController> ();
 		if (compare == false) {
 			reservoir = crateCon.crateContents;

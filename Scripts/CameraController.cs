@@ -7,7 +7,7 @@ public class CameraController: MonoBehaviour {
 	public bool lockCursor;
 	public float mouseSensitivity;
 	public Transform target;
-	public float dstFromTarget = 2;
+	public float dstFromTarget = 6;
 	public Vector2 pitchMinMax = new Vector2 (-40, 85);
 
 	public float rotationSmoothTime = .12f;
