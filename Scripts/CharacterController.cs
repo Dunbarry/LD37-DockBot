@@ -63,8 +63,9 @@ public class CharacterController : MonoBehaviour {
 	public Text Arrow;
 
 //	UI
-//	public GameObject winText;
 	private GameObject winner;
+	private string storeReservoirOne;
+	private string storeReservoirTwo;
 
 	void Start()
 	{
@@ -141,24 +142,34 @@ public class CharacterController : MonoBehaviour {
 //		Debug.Log("Inventory Reset");
 	}
 
+	void mismatch()
+	{
+		match = false;
+		compare = false;
+		FRtext.text = storeReservoirOne;
+		SRtext.text = storeReservoirTwo;
+		textToRed ();
+		reservoir = secondReservoir = "--";
+	}
+
 	void unpackCrate(Collider other)
 	{
 		transform.GetComponent<Animator> ().SetTrigger ("UnpackCrate");
 		CrateController crateCon = other.GetComponent<CrateController> ();
 		if (compare == false) {
-			reservoir = crateCon.crateContents;
+			reservoir = storeReservoirOne = crateCon.crateContents;
 			setScoreBoard ();
 			compare = true; //Check the next crate against this one.
 		} else {
-			secondReservoir = crateCon.crateContents;
+			secondReservoir = storeReservoirTwo = crateCon.crateContents;
 			setScoreBoard ();
 			if (reservoir == secondReservoir) {
-				Debug.Log ("Match!");
+//				Debug.Log ("Match!");
 				match = true;
 				textToGreen ();
 			} else if (reservoir != secondReservoir){
-				Debug.Log ("Not a Match!");
-				inventoryReset ();
+//				Debug.Log ("Not a Match!");
+				mismatch ();
 			}
 		}
 	}
